@@ -1,6 +1,8 @@
+import { async } from "@firebase/util";
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import BookDataService from "../components/crud";
+
 
 const AddBook = ({ id, setBookId }) => {
   const [username, setUsername] = useState("");
@@ -29,14 +31,15 @@ const AddBook = ({ id, setBookId }) => {
     console.log(newBook);
 
     try {
-      if (id !== undefined && id !== "") {
-        await BookDataService.updateBook(id, newBook);
-        setBookId("");
-        setMessage({ error: false, msg: "Updated  record successfully!" });
-      } else {
-        await BookDataService.addBooks(newBook);
+     
+      await BookDataService.addBooks(newBook);
         setMessage({ error: false, msg: "New User added  successfully!" });
-      }
+      setBookId("");
+       
+       
+      
+      
+     
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
@@ -48,6 +51,33 @@ const AddBook = ({ id, setBookId }) => {
     
   };
 
+  const updateUser = async () => {
+    const newBook = {
+      username,
+      fullname,
+      email,
+      roles,
+      status,
+    };
+    console.log(newBook);
+    try {
+      if (id !== undefined && id !== "") {
+        await BookDataService.updateBook(id, newBook);
+        setBookId("");
+        setMessage({ error: false, msg: "Updated  record successfully!" });
+      } else {
+ 
+        setMessage({ error: false, msg: "cant update user records" });
+      }
+    } catch (err) {
+      setMessage({ error: true, msg: err.message });
+    }
+
+    setUsername("");
+    setFullname("");
+    setEmail("");
+    setRoles("");
+  }
   const editHandler = async () => {
     setMessage("");
     try {
@@ -147,6 +177,8 @@ const AddBook = ({ id, setBookId }) => {
             >
               Active
             </Button>
+            <br></br>
+            <br></br>
             <Button className="  group bg-red-500 focus:bg-red-600 "
               variant="danger"
               disabled={!flag}
@@ -160,11 +192,19 @@ const AddBook = ({ id, setBookId }) => {
           </ButtonGroup>
           <div className="d-grid gap-2">
             <Button className=" bg-pink-800" variant="primary" type="Submit">
-              Add/ Update
+              Add user
             </Button>
             
           </div>
         </Form>
+        <br></br>
+        <br></br>
+        <div className="d-grid gap-2">
+            <Button className=" bg-pink-800" variant="primary" type="Submit" onClick={updateUser}>
+              Update user
+            </Button>
+            
+          </div>
       </div>
     </>
   );

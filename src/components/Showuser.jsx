@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {  Button } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import { db } from "../Firebaseconfig";
+import SideBar from "./Sidebar";
+import LogOUt from "./Logout";
 
 import {  doc, deleteDoc, collection, query, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import {
@@ -51,6 +53,8 @@ const [books, setBooks] = useState([]);
   };
   return (
     <>
+    <LogOUt />
+    <SideBar/>
     <div className="mb-2">
         <Button className=" bg-yellow-300" variant="dark edit" onClick={getBooks}>
           Refresh List

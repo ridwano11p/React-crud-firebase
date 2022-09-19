@@ -1,21 +1,20 @@
+import React from "react";
+import { useState } from "react";
 import UserList from "./Showuser";
 
 
-import Modal from "../components/Modal";
-import { useState } from "react";
-
-function Table() {
+const Users = () => {
   const [bookId, setBookId] = useState("");
-  const getBookIdHandler = (id)  => {
+  const getBookIdHandler = (id) => {
     console.log("document id to edit", id);
     setBookId(id);
-  }
+  };
   return (
     <div>
-      <Modal id={bookId} setBookId={setBookId}/>
+      
       <UserList getBookId={getBookIdHandler} />
     </div>
   );
-}
+};
 
-export default Table;
+export default Users;

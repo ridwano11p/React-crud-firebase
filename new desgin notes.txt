@@ -1,0 +1,7 @@
+Add a submenu to the dashboard contaning a adduser and a userlist
+move the addbuton above the active button
+remove updatebutton from the adduserscreen
+move the refershlistbutton to the userlistpage
+rename loginpage to home
+name hoepage to dashboard
+add some css styleing to the form 

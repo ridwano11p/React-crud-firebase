@@ -1,30 +1,42 @@
 import { Link } from "react-router-dom";
 import {FaUserCircle} from  'react-icons/fa';
+import { FaGem, FaHeart } from "react-icons/fa";
+import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter,SidebarContent,SidebarHeader, } from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
+import "../Index2.scss"
 
 const SideBar = () => {
   return (
-    <div className="top-0 left-0 fixed bg-white">
-      <div className="flex">
-        <div className="flex flex-col h-screen p-3 bg-white shadow w-60">
-          <div className="space-y-3">
-            <div className="flex items-center">
-              <h2 className="text-3xl font-bold">Dashboard</h2>
-            </div>
-            <div className="flex-1">
-              <ul className="pt-2 pb-4 space-y-1 text-sm">
-                <li className="rounded-sm">
-                  <Link to={"/users"}>
-                    <a className="flex items-center p-2 space-x-3 rounded-md">
-                      <FaUserCircle />
-                      <span className="text-blue-600">Users</span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="top-0 left-0 fixed  h-full">
+     <ProSidebar>
+  <SidebarHeader>
+    <h1 className="text-2xl text-white">Menu</h1>
+  </SidebarHeader>
+  <SidebarContent>
+  <Menu>
+  <MenuItem>Dashboard
+    <Link to="/dashboard" />
+    </MenuItem>
+  </Menu>
+  <Menu iconShape="square">
+  <SubMenu title="Users" icon={<FaUserCircle />}>
+    <MenuItem>Add User
+    <Link to="/addusers" />
+    </MenuItem>
+   
+    <MenuItem>List Of Users
+    <Link to="/userlist" />
+    </MenuItem>
+   
+  </SubMenu>
+</Menu>
+  </SidebarContent>
+  <SidebarFooter>
+    {/**
+     *  You can add a footer for the sidebar ex: copyright
+     */}
+  </SidebarFooter>
+</ProSidebar>;
     </div>
   );
 };

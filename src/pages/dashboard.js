@@ -1,13 +1,13 @@
  import LogOUt from "../components/Logout";
  import SideBar from "../components/Sidebar";
-const HomePage = () => {
+const Dashboard = () => {
    
     return ( 
         <div>
             <LogOUt />
-            <SideBar />
+            <SideBar className="top-0 left-0 fixed " />
         </div>
      );
 }
  
-export default HomePage;
+export default Dashboard;

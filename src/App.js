@@ -7,10 +7,12 @@ import {
 
 import Loginpage from "./pages/Login";
 import SingupPage from "./pages/Signup";
-import HomePage from "./pages/homepage";
+import Dashboard from "./pages/dashboard";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/Protectedroute"
-import Users from "./pages/users";
+import AddUsers from "./pages/addusers";
+import Userlist from "./pages/userlist";
+
 const App = () => {
   return (  
     
@@ -23,22 +25,31 @@ const App = () => {
         <Route path="/" element={<Loginpage/>} />
         <Route path="/signup" element={<SingupPage/>} />
         <Route className=""
-            path='/homepage'
+            path='/dashboard'
             element={
               <ProtectedRoute>
-                <HomePage />
+                <Dashboard />
               </ProtectedRoute>
             }
           />
 
 <Route className=""
-            path='/users'
+            path='/addusers'
             element={
               <ProtectedRoute>
-                <Users />
+                <AddUsers />
               </ProtectedRoute>
             }
           />
+<Route className=""
+            path='/userlist'
+            element={
+              <ProtectedRoute>
+                <Userlist />
+              </ProtectedRoute>
+            }
+          />
+
         </Routes>
       </BrowserRouter>
           </AuthContextProvider>  

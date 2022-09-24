@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import { db } from "../Firebaseconfig";
 import SideBar from "./Sidebar";
 import LogOUt from "./Logout";
+import { Link } from "react-router-dom";
 
 import {
   doc,
@@ -71,6 +72,16 @@ const UsersList = ({ getBookId, setShowModal }) => {
         >
           Refresh List
         </Button>
+        <Link to={"/addusers"}>
+        <Button
+          className="bg-blue-700 hover:bg-pink-000 text-white 
+          uppercase text-sm font-semibold px-4 py-2 rounded mr-2 mb-2"
+          variant="dark edit"
+        
+        >
+          Add Another User
+        </Button>
+        </Link>
       </div>
 
       {/* <pre>{JSON.stringify(books, undefined, 2)}</pre>} */}

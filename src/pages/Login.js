@@ -1,19 +1,13 @@
 import Header from "../components/Header";
 import LoginForm from "../components/LoginForm";
 
-
 const Loginpage = () => {
-    return ( 
+  return (
     <>
-    <Header />
-    <LoginForm />
-    
-
+      <Header />
+      <LoginForm />
     </>
+  );
+};
 
-    
-    
-    );
-}
- 
 export default Loginpage;

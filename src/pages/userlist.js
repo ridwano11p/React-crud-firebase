@@ -1,11 +1,11 @@
-import React from 'react'
-import Users from '../components/userlist'
+import React from "react";
+import Users from "../components/userlist";
 const Userlist = () => {
   return (
     <div>
-        <Users />
+      <Users />
     </div>
-  )
-}
+  );
+};
 
-export default Userlist
+export default Userlist;

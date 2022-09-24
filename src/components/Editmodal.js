@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import BookDataService from "../components/crud";
 
-const EditModal = ({ id, setBookId, getBookId2}) => {
+const EditModal = ({ id, setBookId, getBookId2 }) => {
   const [username, setUsername] = useState("");
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");

@@ -5,15 +5,15 @@ import Modal from "../components/Modal";
 import { useState } from "react";
 
 const AddUsers = () => {
-    const [bookId, setBookId] = useState("");
-    return ( <div >
-        <LogOUt />
-        
-        <SideBar/>
-        <Modal id={bookId} setBookId={setBookId}/>
-       
+  const [bookId, setBookId] = useState("");
+  return (
+    <div>
+      <LogOUt />
 
-    </div> );
-}
- 
+      <SideBar />
+      <Modal id={bookId} setBookId={setBookId} />
+    </div>
+  );
+};
+
 export default AddUsers;

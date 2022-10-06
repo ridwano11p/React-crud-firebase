@@ -9,8 +9,8 @@ const AddBook = ({ id, setBookId }) => {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [roles, setRoles] = useState("");
-  const [status, setStatus] = useState("Available");
-  const [flag, setFlag] = useState(true);
+  const [status, setStatus] = useState("Active");
+
   const [message, setMessage] = useState({ error: false, msg: "" });
   const navigate = useNavigate();
 
@@ -108,41 +108,11 @@ const AddBook = ({ id, setBookId }) => {
                 onChange={(e) => setRoles(e.target.value)}
                 aria-label="Default select example"
               >
-                <option>Roles</option>
                 <option type="text">Admin</option>
                 <option type="text">User</option>
               </Form.Select>
             </Form.Group>
 
-            <ButtonGroup aria-label="Basic example" className="mb-3">
-              <Button
-                className="bg-green-500 hover:bg-green-700 text-white uppercase text-sm font-semibold px-4 py-2 rounded
-                focus:outline-none focus:ring-4 focus:ring-green-300 
-                dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800
-                mr-2 mb-2"
-                disabled={flag}
-                variant="success"
-                onClick={(e) => {
-                  setStatus("Active");
-                  setFlag(true);
-                }}
-              >
-                Active
-              </Button>
-              <br></br>
-              <br></br>
-              <Button
-                className=" bg-red-500 hover:bg-red-700 text-white uppercase text-sm focus:outline-none focus:ring-4 focus:ring-red-300  font-semibold px-4 py-2 rounded"
-                variant="danger"
-                disabled={!flag}
-                onClick={(e) => {
-                  setStatus("Inactive");
-                  setFlag(false);
-                }}
-              >
-                Inactive
-              </Button>
-            </ButtonGroup>
             <br></br>
             <br></br>
             <div className="d-grid gap-2">
@@ -151,6 +121,10 @@ const AddBook = ({ id, setBookId }) => {
                 uppercase text-sm font-semibold px-4 py-2 roundedmr-2 mb-2"
                 variant="primary"
                 type="Submit"
+                onClick={(e) => {
+                  setStatus("Active");
+                  handleSubmit();
+                }}
               >
                 Add user
               </Button>

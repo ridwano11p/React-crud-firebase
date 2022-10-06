@@ -2,15 +2,41 @@ import { async } from "@firebase/util";
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import BookDataService from "../components/crud";
+import { db } from "../Firebaseconfig";
+import {
+  doc,
+  deleteDoc,
+  collection,
+  query,
+  onSnapshot,
+  QuerySnapshot,
+} from "firebase/firestore";
 
 const EditModal = ({ id, setBookId, getBookId2 }) => {
   const [username, setUsername] = useState("");
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [roles, setRoles] = useState("");
-  const [status, setStatus] = useState("Available");
+  const [status, setStatus] = useState("Active");
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState({ error: false, msg: "" });
+  const [books, setBooks] = useState([]);
+
+  const getUser = () => {
+    const q = query(collection(db, "users"));
+    onSnapshot(q, (querySnapshot) => {
+      const books = [];
+      querySnapshot.forEach((doc) => {
+        books.push(doc.data());
+      });
+      setBooks(books);
+    });
+  };
+
+  //call getUser when app is loaded
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,46 +150,59 @@ const EditModal = ({ id, setBookId, getBookId2 }) => {
             </InputGroup>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBookAuthor">
-            <Form.Select
-              value={roles}
-              onChange={(e) => setRoles(e.target.value)}
-              aria-label="Default select example"
-            >
-              <option>Roles</option>
-              <option type="text">Admin</option>
-              <option type="text">User</option>
-            </Form.Select>
-          </Form.Group>
+          <div className="flex">
+            <div className="flex-none ">Current Role:</div>
+            <div className="flex-initial w-64 ">
+              {books.map((row) => (
+                <h1>{row.roles}</h1>
+              ))}
+            </div>
+          </div>
+          <div>
+            {books.map((row) => (
+              <Form.Group className="mb-3" controlId="formBookAuthor">
+                <Form.Select
+                  value={roles}
+                  onChange={(e) => setRoles(e.target.value)}
+                  aria-label="Default select example"
+                >
+                  <option>{row.roles}</option>
+                  <option type="text">User</option>
+
+                  <option type="text">Admin</option>
+                </Form.Select>
+              </Form.Group>
+            ))}
+          </div>
 
           <ButtonGroup aria-label="Basic example" className="mb-3">
-            <Button
-              className="bg-green-500 hover:bg-green-700 text-white uppercase text-sm font-semibold px-4 py-2 rounded
-                focus:outline-none focus:ring-4 focus:ring-green-300 
-                dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800
-                mr-2 mb-2"
-              disabled={flag}
-              variant="success"
-              onClick={(e) => {
-                setStatus("Active");
-                setFlag(true);
-              }}
-            >
-              Active
-            </Button>
-            <br></br>
-            <br></br>
-            <Button
-              className=" bg-red-500 hover:bg-red-700 text-white uppercase text-sm focus:outline-none focus:ring-4 focus:ring-red-300  font-semibold px-4 py-2 rounded"
-              variant="danger"
-              disabled={!flag}
-              onClick={(e) => {
-                setStatus("Inactive");
-                setFlag(false);
-              }}
-            >
-              Inactive
-            </Button>
+            {status === "Inactive" ? (
+              <Button
+                className="bg-green-500 hover:bg-green-700 text-white uppercase text-sm font-semibold px-4 py-2 rounded
+              focus:outline-none focus:ring-4 focus:ring-green-300 
+              dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800
+              mr-2 mb-2"
+                variant="success"
+                onClick={(e) => {
+                  setStatus("Active");
+                  setFlag(true);
+                }}
+              >
+                Activate
+              </Button>
+            ) : (
+              <Button
+                className=" bg-red-500 hover:bg-red-700 text-white uppercase text-sm focus:outline-none focus:ring-4 focus:ring-red-300  font-semibold px-4 py-2 rounded"
+                variant="danger"
+                disabled={!flag}
+                onClick={(e) => {
+                  setStatus("Inactive");
+                  setFlag(false);
+                }}
+              >
+                Deactivate
+              </Button>
+            )}
           </ButtonGroup>
           <br></br>
           <br></br>

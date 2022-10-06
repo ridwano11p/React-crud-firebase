@@ -154,7 +154,10 @@ const UsersList = ({ getBookId, setShowModal }) => {
                             <div class="items-center px-4 py-3 flex">
                               <div className="flex-1 w-64  ">
                                 <button
-                                  onClick={() => deleteHandler(row.id)}
+                                  onClick={() => {
+                                    deleteHandler(row.id);
+                                    setPopUP(false);
+                                  }}
                                   id="ok-btn"
                                   class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-2xl  shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
                                 >
